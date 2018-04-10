@@ -1,0 +1,7 @@
+{
+  "name": "hack2sol",
+  "version": "1.0.0",
+  "dependencies": {
+    "request": "^2.85.0"
+  }
+}
