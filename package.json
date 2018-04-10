@@ -1,7 +1,9 @@
 {
   "name": "hack2sol",
   "version": "1.0.0",
+  "main": "app.js",
   "dependencies": {
+    "mqtt": "^2.17.0",
     "request": "^2.85.0"
   }
 }
