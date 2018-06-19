@@ -40,9 +40,10 @@ function main () {
 
   iotService.connect(function () {
     setInterval(function () {
-      iotService.publish(DEVICE.ID, DEVICE.SENSOR_ALTERNATE_ID, DEVICE.CAPABILITY_ALTERNATE_ID,
-                [getMeasure()]
-            )
+      iotService.publish(DEVICE.ID,
+        DEVICE.SENSOR_ALTERNATE_ID,
+        DEVICE.CAPABILITY_ALTERNATE_ID,
+        [getMeasure()])
     }, 1000)
   })
 }
