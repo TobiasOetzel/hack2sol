@@ -4,8 +4,8 @@ const IoTService = require('./iotservice');
 const fs = require('fs');
 
 const HUE_BRIDGE = {
-    IP: '192.168.8.102',
-    USER: '3DHj4Ynx6eqovFpksBUtPlUyOfQ15teZ-iljTpB-'
+    IP: '192.168.8.101',
+    USER: 'FUVve1na8CMxo23JJZdXpimguQS36od5hVkwDz2Q'
 };
 
 const IOT = {
