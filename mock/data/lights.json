@@ -1,0 +1,102 @@
+{
+  "1": {
+    "state": {
+      "on": true,
+      "bri": 2,
+      "hue": 10000,
+      "sat": 254,
+      "effect": "none",
+      "xy": [
+        0.5711,
+        0.3986
+      ],
+      "ct": 500,
+      "alert": "none",
+      "colormode": "hs",
+      "mode": "homeautomation",
+      "reachable": false
+    },
+    "swupdate": {
+      "state": "readytoinstall",
+      "lastinstall": null
+    },
+    "type": "Extended color light",
+    "name": "Hue color lamp 1",
+    "modelid": "LCT007",
+    "manufacturername": "Philips",
+    "productname": "Hue color lamp",
+    "capabilities": {
+      "certified": true,
+      "control": {
+        "mindimlevel": 2000,
+        "maxlumen": 800,
+        "colorgamuttype": "other",
+        "colorgamut": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "ct": {
+          "min": 153,
+          "max": 500
+        }
+      },
+      "streaming": {
+        "renderer": false,
+        "proxy": false
+      }
+    },
+    "config": {
+      "archetype": "sultanbulb",
+      "function": "mixed",
+      "direction": "omnidirectional"
+    },
+    "uniqueid": "00:17:88:01:10:2b:ac:00-0b",
+    "swversion": "5.38.1.14919"
+  },
+  "2": {
+    "state": {
+      "on": true,
+      "bri": 254,
+      "alert": "none",
+      "mode": "homeautomation",
+      "reachable": false
+    },
+    "swupdate": {
+      "state": "noupdates",
+      "lastinstall": null
+    },
+    "type": "Dimmable light",
+    "name": "Hue white lamp 1",
+    "modelid": "LWB006",
+    "manufacturername": "Philips",
+    "productname": "Hue white lamp",
+    "capabilities": {
+      "certified": true,
+      "control": {
+        "mindimlevel": 5000,
+        "maxlumen": 800
+      },
+      "streaming": {
+        "renderer": false,
+        "proxy": false
+      }
+    },
+    "config": {
+      "archetype": "classicbulb",
+      "function": "functional",
+      "direction": "omnidirectional"
+    },
+    "uniqueid": "00:17:88:01:10:5c:1e:a4-0b",
+    "swversion": "5.105.0.21169"
+  }
+}

@@ -1,50 +1,16 @@
 const { HueApi } = require('node-hue-api')
-const lightStateChangeEmitter = require('./lightStateChangeEmitter')
+const { init } = require('./lib/apiPoller')
+const { create } = require('./lib/iotServiceFactory')
 
-const HUE_BRIDGE = {
-  IP: '192.168.8.101',
-  USER: 'FUVve1na8CMxo23JJZdXpimguQS36od5hVkwDz2Q'
-}
+module.exports = {
+  start: function (options) {
+    const hueConfig = options.hueConfig
+    const iotServiceConfig = options.iotService
 
-const DEVICE = {
-  ID: 'Hack2Sol_A-Team',
-  SENSOR_ALTERNATE_ID: 'bulb2',
-  CAPABILITY_ALTERNATE_ID: 'bulbState'
-}
+    const iotService = create(iotServiceConfig.tenantId, iotServiceConfig.deviceId)
+    console.log(`using the hue api on ${hueConfig.ip}:${hueConfig.port}, with the user ${hueConfig.user}`)
+    const hueApi = new HueApi(hueConfig.ip, hueConfig.user, /* timeout - default = */ 0, hueConfig.port)
 
-const iotService = require('./iotServiceFactory').create(DEVICE.ID)
-const hueApi = new HueApi(HUE_BRIDGE.IP, HUE_BRIDGE.USER)
-
-lightStateChangeEmitter.on('change', function (allLightsResponse) {
-  if (iotService) {
-    iotService.publish(
-      DEVICE.SENSOR_ALTERNATE_ID,
-      DEVICE.CAPABILITY_ALTERNATE_ID,
-      {
-        reachable: true
-      })
-    console.log(`published light state change to iot service `)
-  } else {
-    console.log('light state change detected')
-  }
-})
-
-async function pollApi () {
-  lightStateChangeEmitter.updateState((await hueApi.lights()).lights)
-
-  setTimeout(async function () {
-    pollApi()
-  }, 1000)
-}
-
-function main () {
-  if (iotService) {
-    iotService.connect(function () {
-      pollApi()
-    })
-  } else {
-    pollApi()
+    init(hueApi, iotService)
   }
 }
-
-main()

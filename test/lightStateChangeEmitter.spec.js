@@ -1,4 +1,4 @@
-const lightStateChangeEmitter = require('../lightStateChangeEmitter')
+const lightStateChangeEmitter = require('../lib/lightStateChangeEmitter')
 const sinon = require('sinon')
 
 function createResponse () {
