@@ -28,14 +28,14 @@ class IoTService {
     }
   }
 
-  publish (deviceID, sensorAlternateID, capabilityAlternateID, measures) {
+  publish (sensorAlternateID, capabilityAlternateID, measures) {
     let payload = {
       'capabilityAlternateId': capabilityAlternateID,
       'sensorAlternateId': sensorAlternateID,
       'measures': measures
     }
 
-    this.client.publish(`measures/${deviceID}`, JSON.stringify(payload))
+    this.client.publish(`measures/${this.deviceID}`, JSON.stringify(payload))
 
     console.log('sent: ', JSON.stringify(payload))
   }

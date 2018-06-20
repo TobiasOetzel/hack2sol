@@ -1,20 +1,9 @@
-const Hue = require('./hue')
-const IoTService = require('./iotservice')
-
-const fs = require('fs')
+const { HueApi } = require('node-hue-api')
+const lightStateChangeEmitter = require('./lightStateChangeEmitter')
 
 const HUE_BRIDGE = {
   IP: '192.168.8.101',
   USER: 'FUVve1na8CMxo23JJZdXpimguQS36od5hVkwDz2Q'
-}
-
-const IOT = {
-  TENANT_ID: 'hack2sol-master',
-  CERTIFICATE: {
-    KEY: fs.readFileSync('./certificate/key', 'utf8'),
-    CERT: fs.readFileSync('./certificate/cert', 'utf8'),
-    PASSPHRASE: fs.readFileSync('./certificate/passphrase', 'utf8')
-  }
 }
 
 const DEVICE = {
@@ -23,29 +12,36 @@ const DEVICE = {
   CAPABILITY_ALTERNATE_ID: 'bfebef751b9bf768'
 }
 
-function getMeasure () {
-  return {
-    'on': true,
-    'bri': 255,
-    'hue': 30000,
-    'sat': 200,
-    'reachable': true
+const iotService = require('./iotServiceFactory').create(DEVICE.ID)
+const hueApi = new HueApi(HUE_BRIDGE.IP, HUE_BRIDGE.USER)
+
+lightStateChangeEmitter.on('change', function (allLightsResponse) {
+  if (iotService) {
+    iotService.publish(
+      DEVICE.SENSOR_ALTERNATE_ID,
+      DEVICE.CAPABILITY_ALTERNATE_ID,
+      {})
+  } else {
+    console.log('light state change detected')
   }
+})
+
+async function pollApi () {
+  lightStateChangeEmitter.updateState((await hueApi.lights()).lights)
+
+  setTimeout(async function () {
+    pollApi()
+  }, 1000)
 }
 
 function main () {
-// eslint-disable-next-line no-new
-  new Hue(HUE_BRIDGE.IP, HUE_BRIDGE.USER)
-  let iotService = new IoTService(IOT.TENANT_ID, DEVICE.ID, IOT.CERTIFICATE.KEY, IOT.CERTIFICATE.CERT, IOT.CERTIFICATE.PASSPHRASE)
-
-  iotService.connect(function () {
-    setInterval(function () {
-      iotService.publish(DEVICE.ID,
-        DEVICE.SENSOR_ALTERNATE_ID,
-        DEVICE.CAPABILITY_ALTERNATE_ID,
-        [getMeasure()])
-    }, 1000)
-  })
+  if (iotService) {
+    iotService.connect(function () {
+      pollApi()
+    })
+  } else {
+    pollApi()
+  }
 }
 
 main()
