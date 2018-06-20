@@ -5,5 +5,12 @@
   "dependencies": {
     "mqtt": "^2.17.0",
     "request": "^2.85.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
   }
 }
