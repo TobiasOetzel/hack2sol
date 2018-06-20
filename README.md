@@ -14,5 +14,5 @@ IoT Services | IoT Application Enablement
 Device       |  NA                           
 SensorType   |  Thing Type                        
 Sensor       |  Thing                             
-Capability   |  Propert Set                       
+Capability   |  Property Set                       
 Property     |  Property                          
