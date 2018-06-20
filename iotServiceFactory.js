@@ -6,7 +6,7 @@ module.exports = {
     let iotService
     try {
       let IOT = {
-        TENANT_ID: 'hack2sol-master',
+        TENANT_ID: '47f584a3-765d-4503-a5ba-37f922a2c222',
         CERTIFICATE: {
           KEY: fs.readFileSync('./certificate/key', 'utf8'),
           CERT: fs.readFileSync('./certificate/cert', 'utf8'),

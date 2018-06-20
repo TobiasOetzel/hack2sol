@@ -35,9 +35,10 @@ class IoTService {
       'measures': measures
     }
 
-    this.client.publish(`measures/${this.deviceID}`, JSON.stringify(payload))
+    let topic = `measures/${this.deviceId}`
+    this.client.publish(topic, JSON.stringify(payload))
 
-    console.log('sent: ', JSON.stringify(payload))
+    console.log(`sent: , ${JSON.stringify(payload)} to ${topic}`)
   }
 }
 

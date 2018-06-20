@@ -7,9 +7,9 @@ const HUE_BRIDGE = {
 }
 
 const DEVICE = {
-  ID: 'f833f3c1-ea3e-4681-b865-1d18e80c026e',
-  SENSOR_ALTERNATE_ID: '2482d776-4d37-43c4-93a0-bad9638ccdd1',
-  CAPABILITY_ALTERNATE_ID: 'bfebef751b9bf768'
+  ID: 'Hack2Sol_A-Team',
+  SENSOR_ALTERNATE_ID: 'bulb2',
+  CAPABILITY_ALTERNATE_ID: 'bulbState'
 }
 
 const iotService = require('./iotServiceFactory').create(DEVICE.ID)
@@ -20,7 +20,10 @@ lightStateChangeEmitter.on('change', function (allLightsResponse) {
     iotService.publish(
       DEVICE.SENSOR_ALTERNATE_ID,
       DEVICE.CAPABILITY_ALTERNATE_ID,
-      {})
+      {
+        reachable: true
+      })
+    console.log(`published light state change to iot service `)
   } else {
     console.log('light state change detected')
   }

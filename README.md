@@ -16,3 +16,22 @@ SensorType   |  Thing Type
 Sensor       |  Thing                             
 Capability   |  Property Set                       
 Property     |  Property                          
+
+
+## how to use the certificate
+
+1. Choose your device in the IOT service cockpit
+2. generate and download the certificate note the secret
+3. create a file ./certificate/passphrase paste the secret
+4. create a file ./certificate/key paste the key of the certificate starting with
+```
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+many lines
+-----END ENCRYPTED PRIVATE KEY-----
+```
+5. create a file ./certificate/cert paste the key
+```
+-----BEGIN CERTIFICATE-----
+many lines
+-----END CERTIFICATE-----
+```
