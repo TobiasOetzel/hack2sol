@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node ./bin/cli.js",
-    "startMock": "node ./bin/cli.js --mock",
+    "startMock": "node ./bin/cli.js --mock --chaos",
     "test": "standard && mocha"
   },
   "devDependencies": {

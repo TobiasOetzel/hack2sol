@@ -25,6 +25,10 @@ const argv = require('yargs')
     alias: 'm',
     describe: 'mocks the hue bridge - do not specify huePort and hueIp when using this',
     default: false
+  }).option('chaos', {
+    alias: 'c',
+    describe: 'use with --mock this causes the reachable state to flip in random intervals from 0 to 10 seconds',
+    default: false
   }).argv
 
 let hueIp = argv.hueIp
@@ -34,7 +38,7 @@ let user = argv.hueUser
 if (argv.mock) {
   huePort = 3000
   hueIp = '127.0.0.1'
-  startFakeHueBridge(user)
+  startFakeHueBridge(user, argv.chaos)
 }
 
 start({

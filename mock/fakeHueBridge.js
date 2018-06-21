@@ -2,10 +2,23 @@ const express = require('express')
 const lights = require('./data/lights')
 const morgan = require('morgan')
 
+function startMonkey (bulbId, reachable) {
+  lights[bulbId].state.reachable = reachable
+  let zeroToTenSeconds = Math.floor(Math.random() * 10000) + 1
+  setTimeout(function () {
+    startMonkey(bulbId, !reachable)
+  }, zeroToTenSeconds)
+}
+
 module.exports = {
-  startFakeHueBridge: function (user) {
+  startFakeHueBridge: function (user, useChaosMonkey) {
     const app = express()
     app.use(morgan('tiny'))
+
+    if (useChaosMonkey) {
+      startMonkey('1', true)
+      startMonkey('2', true)
+    }
 
     app.get(`/api/${user}/lights`, function (req, res) {
       res.json(lights)
