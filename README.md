@@ -17,6 +17,18 @@ Sensor       |  Thing
 Capability   |  Property Set                       
 Property     |  Property                          
 
+## using the cli
+```
+# print available options
+npm start -- --help
+# passes the argument deviceId
+npm start -- --deviceId="123"
+```
+
+## how to start without hue hub
+```
+npm run startMock
+```
 
 ## how to use the certificate
 

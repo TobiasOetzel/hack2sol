@@ -29,7 +29,8 @@ const argv = require('yargs')
     alias: 'c',
     describe: 'use with --mock this causes the reachable state to flip in random intervals from 0 to 10 seconds',
     default: false
-  }).argv
+  }).help()
+  .argv
 
 let hueIp = argv.hueIp
 let huePort = argv.huePort
