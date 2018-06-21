@@ -1,5 +1,9 @@
-const { start } = require('../app')
 const { startFakeHueBridge } = require('../mock/fakeHueBridge')
+const { HueApi } = require('node-hue-api')
+const { init } = require('../lib/apiPoller')
+const { create } = require('../lib/iotServiceMqttFactory')
+const { searchForNewLights } = require('../lib/lightSearcher')
+
 const argv = require('yargs')
   .option('hueIp', {
     alias: 'b',
@@ -29,6 +33,14 @@ const argv = require('yargs')
     alias: 'c',
     describe: 'use with --mock this causes the reachable state to flip in random intervals from 0 to 10 seconds',
     default: false
+  }).option('search', {
+    alias: 's',
+    describe: 'search for a new light',
+    default: false
+  }).option('skipIotService', {
+    alias: 'sk',
+    describe: 'skip the iot service',
+    default: false
   }).help()
   .argv
 
@@ -42,7 +54,7 @@ if (argv.mock) {
   startFakeHueBridge(user, argv.chaos)
 }
 
-start({
+let options = {
   hueConfig: {
     ip: hueIp,
     user: user,
@@ -52,4 +64,22 @@ start({
     deviceId: argv.deviceId,
     tenantId: argv.tenantId
   }
-})
+}
+
+const hueConfig = options.hueConfig
+const iotServiceConfig = options.iotService
+
+let iotService
+
+if (!argv.skipIotService) {
+  iotService = create(iotServiceConfig.tenantId, iotServiceConfig.deviceId)
+}
+
+console.log(`using the hue api on ${hueConfig.ip}:${hueConfig.port}, with the user ${hueConfig.user}`)
+const hueApi = new HueApi(hueConfig.ip, hueConfig.user, /* timeout - default = */ 0, hueConfig.port)
+
+if (argv.search) {
+  searchForNewLights(hueApi)
+} else {
+  init(hueApi, iotService)
+}
