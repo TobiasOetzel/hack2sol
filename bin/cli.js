@@ -2,7 +2,6 @@ const { startFakeHueBridge } = require('../mock/fakeHueBridge')
 const { HueApi } = require('node-hue-api')
 const { init } = require('../lib/apiPoller')
 const { create } = require('../lib/iotServiceMqttFactory')
-const { searchForNewLights } = require('../lib/lightSearcher')
 const IotServiceRestClient = require('../lib/IotServiceRestClient')
 
 const argv = require('yargs')
@@ -33,10 +32,6 @@ const argv = require('yargs')
   }).option('chaos', {
     alias: 'c',
     describe: 'use with --mock this causes the reachable state to flip in random intervals from 0 to 10 seconds',
-    default: false
-  }).option('search', {
-    alias: 's',
-    describe: 'search for a new light',
     default: false
   }).option('skipIotService', {
     alias: 'sk',
@@ -81,8 +76,4 @@ const hueApi = new HueApi(hueConfig.ip, hueConfig.user, /* timeout - default = *
 const credentials = require('../credentials')
 const iotServiceRestClient = new IotServiceRestClient(credentials.iotRestUser, credentials.iotRestPassword, options.iotService.deviceId)
 
-if (argv.search) {
-  searchForNewLights(hueApi)
-} else {
-  init(hueApi, iotServiceMqtt, iotServiceRestClient)
-}
+init(hueApi, iotServiceMqtt, iotServiceRestClient)

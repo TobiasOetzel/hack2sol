@@ -24,6 +24,16 @@ module.exports = {
       res.json(lights)
     })
 
+    app.post(`/api/${user}/lights`, function (req, res) {
+      res.json({})
+    })
+
+    app.get(`/api/${user}/lights/new`, function (req, res) {
+      res.json({
+        lastscan: 'active'
+      })
+    })
+
     return new Promise((resolve) => {
       app.listen(3000, function () {
         console.log('fake hue app started on port 3000')
