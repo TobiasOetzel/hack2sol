@@ -59,4 +59,5 @@ typings/
 
 .idea/
 certificate/
+credentials.json
 package-lock.json
