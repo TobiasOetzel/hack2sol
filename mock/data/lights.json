@@ -14,7 +14,7 @@
       "alert": "none",
       "colormode": "hs",
       "mode": "homeautomation",
-      "reachable": false
+      "reachable": true
     },
     "swupdate": {
       "state": "readytoinstall",
@@ -97,6 +97,42 @@
       "direction": "omnidirectional"
     },
     "uniqueid": "00:17:88:01:10:5c:1e:a4-0b",
+    "swversion": "5.105.0.21169"
+  },
+  "3": {
+    "state": {
+      "on": true,
+      "bri": 254,
+      "alert": "none",
+      "mode": "homeautomation",
+      "reachable": false
+    },
+    "swupdate": {
+      "state": "noupdates",
+      "lastinstall": null
+    },
+    "type": "Dimmable light",
+    "name": "Hue white lamp 1",
+    "modelid": "LWB006",
+    "manufacturername": "Philips",
+    "productname": "Hue white lamp",
+    "capabilities": {
+      "certified": true,
+      "control": {
+        "mindimlevel": 5000,
+        "maxlumen": 800
+      },
+      "streaming": {
+        "renderer": false,
+        "proxy": false
+      }
+    },
+    "config": {
+      "archetype": "classicbulb",
+      "function": "functional",
+      "direction": "omnidirectional"
+    },
+    "uniqueid": "13:37:88:01:10:5c:1e:a4-0b",
     "swversion": "5.105.0.21169"
   }
 }

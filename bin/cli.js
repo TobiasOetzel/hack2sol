@@ -74,6 +74,6 @@ if (!argv.skipIotService) {
 console.log(`using the hue api on ${hueConfig.ip}:${hueConfig.port}, with the user ${hueConfig.user}`)
 const hueApi = new HueApi(hueConfig.ip, hueConfig.user, /* timeout - default = */ 0, hueConfig.port)
 const credentials = require('../credentials')
-const iotServiceRestClient = new IotServiceRestClient(credentials.iotRestUser, credentials.iotRestPassword, options.iotService.deviceId)
+const iotServiceRestClient = new IotServiceRestClient(credentials.iotRestUser, credentials.iotRestPassword)
 
 init(hueApi, iotServiceMqtt, iotServiceRestClient)
